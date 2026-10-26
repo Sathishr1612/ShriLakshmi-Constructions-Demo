@@ -373,16 +373,6 @@ body.loaded .reveal-up { animation: revealUp 1s var(--ease) forwards; animation-
 }
 
 /* Why */
-.why-card { position: relative; background: #fff; padding: 2.2rem 1.8rem; border-radius: var(--radius); height: 100%; overflow: hidden; box-shadow: 0 10px 30px -20px rgba(36, 25, 122, .3); transition: transform .5s var(--ease), color .5s; z-index: 1; }
-.why-card::before { content: ''; position: absolute; inset: 0; background: var(--grad); transform: translateY(101%); transition: transform .6s var(--ease); z-index: -1; }
-.why-card:hover { transform: translateY(-8px); }
-.why-card:hover::before { transform: none; }
-.why-card:hover, .why-card:hover h5, .why-card:hover p, .why-card:hover i { color: #fff; }
-.why-card i { font-size: 2.4rem; color: var(--purple); transition: color .4s; }
-.why-card h5 { margin: 1rem 0 .5rem; transition: color .4s; }
-.why-card p { color: var(--muted); margin: 0; transition: color .4s; }
-.why-num { position: absolute; top: .6rem; right: 1.2rem; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 3.4rem; color: rgba(123, 47, 247, .08); transition: color .4s; }
-.why-card:hover .why-num { color: rgba(255, 255, 255, .15); }
 
 /* Services */
 .services-section { background: #fff; }
@@ -670,14 +660,12 @@ body.loaded .reveal-up { animation: revealUp 1s var(--ease) forwards; animation-
 }
 @media (max-width: 767.98px) {
   /* Compact rows instead of tall cards */
-  .services-section .row.g-4, .why-section .row.g-4 { --bs-gutter-y: .8rem; }
-  .service-card, .why-card { display: grid; grid-template-columns: 52px 1fr; column-gap: 1rem; align-items: start; padding: 1.1rem 1.2rem; }
+  .services-section .row.g-4 { --bs-gutter-y: .8rem; }
+  .service-card { display: grid; grid-template-columns: 52px 1fr; column-gap: 1rem; align-items: start; padding: 1.1rem 1.2rem; }
   .service-icon { grid-row: span 2; width: 52px; height: 52px; margin: 0; font-size: 1.3rem; border-radius: 14px; }
-  .service-card h5, .why-card h5 { margin: .1rem 0 .25rem; font-size: 1.02rem; }
-  .service-card p, .why-card p { font-size: .88rem; }
-  .why-card i { grid-row: span 2; font-size: 1.9rem; line-height: 1; }
-  .why-num { font-size: 2rem; top: .4rem; right: .9rem; }
-  .why-card:hover, .service-card:hover { transform: none; }
+  .service-card h5 { margin: .1rem 0 .25rem; font-size: 1.02rem; }
+  .service-card p { font-size: .88rem; }
+  .service-card:hover { transform: none; }
 
   /* Shorter project media */
   .project-media { height: 220px; }
@@ -766,11 +754,11 @@ h1, h2, h3, h4, h5, h6 { color: var(--ink-strong); }
 .lead-text { font-size: 1.25rem; line-height: 1.6; color: var(--ink-strong); font-weight: 400; }
 
 /* Card / item titles */
-.value-card h5, .why-card h5, .service-card h5, .project-body h5, .ci-item h6, .hs-title {
+.value-card h5, .service-card h5, .project-body h5, .ci-item h6, .hs-title {
   font-family: 'Outfit', sans-serif; font-weight: 600; letter-spacing: 0;
 }
-.value-card h5, .why-card h5, .service-card h5, .project-body h5 { font-size: var(--fs-card); color: var(--ink-strong); }
-.value-card p, .why-card p, .service-card p { font-size: 1rem; line-height: 1.65; color: var(--body-ink); }
+.value-card h5, .service-card h5, .project-body h5 { font-size: var(--fs-card); color: var(--ink-strong); }
+.value-card p, .service-card p { font-size: 1rem; line-height: 1.65; color: var(--body-ink); }
 .loc { font-size: .95rem; }
 .facts li { font-size: .82rem; }
 
@@ -812,9 +800,6 @@ h1, h2, h3, h4, h5, h6 { color: var(--ink-strong); }
 .service-card::after { content: none; }
 .value-icon { background: #f1ecf9; color: var(--indigo); border-radius: 12px; }
 .value-card:hover .value-icon { background: var(--indigo); transform: none; }
-.why-card i { color: var(--brass); }
-.why-card::before { background: var(--indigo); }
-.why-num { color: rgba(31, 26, 54, .06); }
 .about-tabs .nav-link { border-radius: 4px; background: transparent; border: 1px solid rgba(31, 26, 54, .15); }
 .about-tabs .nav-link.active { background: var(--indigo); border-color: var(--indigo); }
 .about-tab-content { border-left-color: var(--brass); }
@@ -823,7 +808,7 @@ h1, h2, h3, h4, h5, h6 { color: var(--ink-strong); }
 .cta-inner::before, .cta-inner::after { content: none; }
 .contact-info { background: var(--indigo); background-image: none; border-radius: 6px; }
 .ci-item > i { color: var(--brass-light); }
-.enquiry-form, .service-card, .value-card, .why-card, .project-card, .faq-accordion .accordion-item { border-radius: 6px !important; }
+.enquiry-form, .service-card, .value-card, .project-card, .faq-accordion .accordion-item { border-radius: 6px !important; }
 
 /* ---------- About — plaster with an architectural line drawing ----------
    A faint vector elevation sits behind the content: sharp at any size,
@@ -875,3 +860,25 @@ h1, h2, h3, h4, h5, h6 { color: var(--ink-strong); }
 }
 .footer .hero-btn, .footer .hero-btn:hover { color: var(--indigo); }
 .footer-phone, .numbers-list strong, .hs-count { font-variant-numeric: lining-nums; font-feature-settings: "lnum" 1; }
+
+
+/* ---------- Why choose us — no boxes, a 2×2 grid of hairlines ---------- */
+.why-section { background: #fbf9f5; }
+.why-head { position: sticky; top: 120px; }
+.why-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(31, 26, 54, .14); }
+.why-list li { padding: 2.4rem 2.2rem 2.6rem 0; border-bottom: 1px solid rgba(31, 26, 54, .14); }
+.why-list li:nth-child(even) { padding: 2.4rem 0 2.6rem 2.2rem; border-left: 1px solid rgba(31, 26, 54, .14); }
+.why-no { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.6rem; line-height: 1; color: var(--brass); font-variant-numeric: lining-nums; margin-bottom: 1.2rem; }
+.why-list h3 { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 1.25rem; color: var(--ink-strong); margin: 0 0 .5rem; }
+.why-list p { margin: 0; font-size: 1rem; line-height: 1.65; color: var(--body-ink); max-width: 320px; }
+@media (max-width: 991.98px) { .why-head { position: static; } }
+@media (max-width: 575.98px) {
+  .why-list { grid-template-columns: 1fr; }
+  .why-list li, .why-list li:nth-child(even) { padding: 1.8rem 0; border-left: 0; }
+  .why-no { font-size: 2.1rem; margin-bottom: .8rem; }
+}
+
+/* Section labels — plain small caps, no trailing line */
+.eyebrow::after, .hero-kicker::after, .note-kicker::after, .numbers-kicker::after, .howto-kicker::after { content: none; }
+.eyebrow, .hero-kicker, .note-kicker, .numbers-kicker, .howto-kicker { font-size: 1rem; font-weight: 600; letter-spacing: .2em; margin-bottom: 1.2rem; }
+@media (max-width: 767.98px) { .eyebrow, .hero-kicker, .note-kicker, .numbers-kicker, .howto-kicker { font-size: .875rem; letter-spacing: .16em; } }
