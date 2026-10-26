@@ -16,7 +16,7 @@
     pre.classList.add('done');
     document.body.classList.remove('loading');
     document.body.classList.add('loaded');
-    AOS.init({ duration: 900, easing: 'ease-out-cubic', once: true, offset: 80 });
+    AOS.init({ duration: 1100, once: false, mirror: true, offset: 160 });
   }
   window.addEventListener('load', () => setTimeout(hideLoader, 1900));
   setTimeout(hideLoader, 4500); // safety net if an asset hangs
@@ -77,6 +77,28 @@
     window.addEventListener('scroll', reveal, { passive: true });
     window.addEventListener('load', reveal);
     reveal();
+  }
+
+  /* ---------- Parallax: images drift inside their frames while scrolling ---------- */
+  const pxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+  if (pxEls.length && !reduceMotion) {
+    let ticking = false;
+    const update = () => {
+      const vh = window.innerHeight;
+      pxEls.forEach(el => {
+        const box = el.parentElement.getBoundingClientRect();
+        if (box.bottom < -200 || box.top > vh + 200) return;
+        // -1 when the frame enters at the bottom, +1 when it leaves at the top
+        const p = ((vh - box.top) / (vh + box.height)) * 2 - 1;
+        const shift = Math.max(-1, Math.min(1, p)) * (parseFloat(el.dataset.parallax) || 40);
+        el.style.translate = `0 ${(-shift).toFixed(1)}px`;
+      });
+      ticking = false;
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
   }
 
   /* ---------- Counters & process line (on view) ---------- */

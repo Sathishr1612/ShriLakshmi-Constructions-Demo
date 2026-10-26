@@ -882,3 +882,39 @@ h1, h2, h3, h4, h5, h6 { color: var(--ink-strong); }
 .eyebrow::after, .hero-kicker::after, .note-kicker::after, .numbers-kicker::after, .howto-kicker::after { content: none; }
 .eyebrow, .hero-kicker, .note-kicker, .numbers-kicker, .howto-kicker { font-size: 1rem; font-weight: 600; letter-spacing: .2em; margin-bottom: 1.2rem; }
 @media (max-width: 767.98px) { .eyebrow, .hero-kicker, .note-kicker, .numbers-kicker, .howto-kicker { font-size: .875rem; letter-spacing: .16em; } }
+
+/* ==========================================================
+   Scroll motion — direction follows layout
+   Elements are hidden only after AOS initialises (.aos-init),
+   so content stays visible if the script never loads.
+   ========================================================== */
+:root { --move: 80px; --rise: 70px; --ease-out: cubic-bezier(.22, 1, .36, 1); --ease-wipe: cubic-bezier(.77, 0, .18, 1); }
+[data-aos="from-left"], [data-aos="from-right"], [data-aos="rise"] { transition-property: opacity, transform; transition-timing-function: var(--ease-out) !important; }
+[data-aos="from-left"].aos-init { opacity: 0; transform: translate3d(calc(var(--move) * -1), 0, 0); }
+[data-aos="from-right"].aos-init { opacity: 0; transform: translate3d(var(--move), 0, 0); }
+[data-aos="rise"].aos-init { opacity: 0; transform: translate3d(0, var(--rise), 0) scale(.97); }
+[data-aos="from-left"].aos-init.aos-animate, [data-aos="from-right"].aos-init.aos-animate, [data-aos="rise"].aos-init.aos-animate { opacity: 1; transform: none; }
+
+/* Image wipes: a mask pulled back from the outer edge while the image settles */
+[data-aos^="wipe"] { transition-property: clip-path, transform; transition-timing-function: var(--ease-wipe) !important; }
+[data-aos="wipe-right"].aos-init { clip-path: inset(0 0 0 100%); transform: scale(1.08); }
+[data-aos="wipe-left"].aos-init { clip-path: inset(0 100% 0 0); transform: scale(1.08); }
+[data-aos="wipe-up"].aos-init { clip-path: inset(100% 0 0 0); transform: scale(1.04); }
+[data-aos^="wipe"].aos-init.aos-animate { clip-path: inset(-80px); transform: none; }
+
+@media (max-width: 767.98px) {
+  :root { --move: 36px; --rise: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-aos].aos-init { opacity: 1 !important; transform: none !important; clip-path: none !important; }
+}
+
+/* ---------- Scroll-linked parallax ----------
+   Images sit slightly enlarged inside a clipping frame and drift with the
+   scroll. Uses the independent translate/scale properties so it composes
+   with hover zooms and entrance wipes instead of overriding them. */
+.pfx-clip { position: relative; overflow: hidden; }
+.about-frame .pfx-clip { box-shadow: 0 30px 60px -30px rgba(31, 26, 54, .45); }
+.about-frame .pfx-clip img { box-shadow: none; }
+[data-parallax] { scale: 1.14; will-change: translate; }
+@media (prefers-reduced-motion: reduce) { [data-parallax] { scale: 1; translate: none !important; } }
