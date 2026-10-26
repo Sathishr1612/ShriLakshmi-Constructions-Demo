@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 760" fill="none" stroke="#2a2463" stroke-width="1.2">
+  <!-- ground -->
+  <line x1="0" y1="720" x2="640" y2="720"/>
+  <path d="M0 732 h640" stroke-dasharray="2 6"/>
+  <!-- building outline G+4 -->
+  <rect x="150" y="120" width="340" height="600"/>
+  <rect x="140" y="104" width="360" height="16"/>
+  <rect x="330" y="40" width="110" height="64"/>
+  <!-- floor slabs -->
+  <path d="M140 240 h360 M140 360 h360 M140 480 h360 M140 600 h360"/>
+  <!-- columns -->
+  <path d="M150 120 v600 M270 120 v600 M370 120 v600 M490 120 v600" stroke-dasharray="4 5" opacity=".6"/>
+  <!-- windows -->
+  <g>
+    <rect x="175" y="150" width="70" height="60"/><rect x="290" y="150" width="60" height="60"/><rect x="395" y="150" width="70" height="60"/>
+    <rect x="175" y="270" width="70" height="60"/><rect x="290" y="270" width="60" height="60"/><rect x="395" y="270" width="70" height="60"/>
+    <rect x="175" y="390" width="70" height="60"/><rect x="290" y="390" width="60" height="60"/><rect x="395" y="390" width="70" height="60"/>
+    <rect x="175" y="510" width="70" height="60"/><rect x="290" y="510" width="60" height="60"/><rect x="395" y="510" width="70" height="60"/>
+    <path d="M210 150 v60 M210 270 v60 M210 390 v60 M210 510 v60 M430 150 v60 M430 270 v60 M430 390 v60 M430 510 v60"/>
+  </g>
+  <!-- balconies -->
+  <path d="M280 228 h80 M280 348 h80 M280 468 h80 M280 588 h80"/>
+  <!-- door + gate -->
+  <rect x="290" y="630" width="60" height="90"/>
+  <path d="M175 640 h70 v80 M395 640 h70 v80"/>
+  <!-- dimension lines -->
+  <g stroke="#b08a4a">
+    <line x1="150" y1="748" x2="490" y2="748"/><path d="M150 742 v12 M490 742 v12"/>
+    <line x1="540" y1="120" x2="540" y2="720"/><path d="M534 120 h12 M534 720 h12"/>
+    <path d="M534 240 h12 M534 360 h12 M534 480 h12 M534 600 h12"/>
+  </g>
+  <g fill="#b08a4a" stroke="none" font-family="Courier New, monospace" font-size="14">
+    <text x="305" y="744">40'-0"</text>
+    <text x="556" y="425">G+4</text>
+  </g>
+</svg>
