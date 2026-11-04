@@ -701,32 +701,38 @@
           <form id="enquiryForm" class="enquiry-form" novalidate>
             <div class="row g-3">
               <div class="col-md-6 form-floating">
-                <input type="text" class="form-control" id="fName" placeholder="Full name" required>
+                <input type="text" class="form-control" id="Name" placeholder="Full name" required>
                 <label for="fName">Full name*</label>
+                <small class="text-danger error-msg d-none"></small>
                 <div class="invalid-feedback">Please enter your name.</div>
               </div>
               <div class="col-md-6 form-floating">
-                <input type="tel" class="form-control" id="fPhone" placeholder="Phone number" pattern="[0-9+\s-]{10,15}" required>
+                <input type="tel" class="form-control" id="Phone" placeholder="Phone number" pattern="[0-9+\s-]{10,15}" required>
                 <label for="fPhone">Phone number*</label>
+                <small class="text-danger error-msg d-none"></small>
                 <div class="invalid-feedback">Please enter a valid phone number.</div>
               </div>
               <div class="col-md-6 form-floating">
-                <input type="email" class="form-control" id="fEmail" placeholder="Email">
+                <input type="email" class="form-control" id="Email" placeholder="Email">
                 <label for="fEmail">Email</label>
+                <small class="text-danger error-msg d-none"></small>
                 <div class="invalid-feedback">Please enter a valid email.</div>
               </div>
               <div class="col-md-6 form-floating">
-                <select class="form-select" id="fInterest">
+                <select class="form-select" id="Interest">
                   <option>Residential</option><option>Commercial</option><option>Renovation</option><option>Interiors</option>
                 </select>
                 <label for="fInterest">I’m interested in</label>
+                <small class="text-danger error-msg d-none"></small>
               </div>
               <div class="col-12 form-floating">
-                <textarea class="form-control" id="fMsg" placeholder="Message" style="height:130px"></textarea>
+                <textarea class="form-control" id="Msg" placeholder="Message" style="height:130px"></textarea>
                 <label for="fMsg">Message</label>
+                <small class="text-danger error-msg d-none"></small>
               </div>
               <div class="col-12">
                 <button type="submit" class="btn btn-brand btn-lg w-100 magnetic"><i class="bi bi-send-fill me-1"></i> Send Enquiry</button>
+                <small id="formSuccess" class="text-success d-none"></small>
               </div>
             </div>
             <div class="form-success" id="formSuccess">
@@ -828,5 +834,93 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="assets/js/main.js?v=2610c"></script>
+  <script>
+        const scriptURL =
+            "https://script.google.com/macros/s/AKfycbz61QhCztqpnhJWEcLQ6x34Fh-wPPNPbTTz-J-QGLKArRetDgP516SZtFcFcjU3imZsDw/exec";
+
+        const PhoneValidation = /^(?:\+91[\-\s]?|0)?[6-9]\d{9}$/;
+        const EmailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        function showFieldError(inputId, message) {
+            let input = document.getElementById(inputId);
+            let error = input.parentElement.querySelector(".error-msg");
+
+            if (!error) return false;
+
+            error.innerText = message;
+            error.classList.remove("d-none");
+            return false;
+        }
+
+        function clearAllErrors() {
+            document.querySelectorAll(".error-msg").forEach((e) => {
+                e.classList.add("d-none");
+                e.innerText = "";
+            });
+        }
+
+        function validateField(id) {
+            let value = document.getElementById(id).value.trim();
+
+            if (!value)
+                return showFieldError(id, "This field is required.");
+
+            if (id === "Email" && !EmailValidation.test(value))
+                return showFieldError(id, "Please enter a valid email address.");
+
+            if (id === "Phone" && !PhoneValidation.test(value))
+                return showFieldError(id, "Please enter a valid phone number.");
+
+            return true;
+        }
+        document.querySelector("form")
+            .addEventListener("submit", function (event) {
+
+                event.preventDefault();
+                clearAllErrors();
+
+                const fields = ["Name", "Email", "Phone", "Interest"];
+
+                for (let field of fields) {
+                    if (!validateField(field)) return;
+                }
+
+                let success = document.getElementById("formSuccess");
+                success.classList.remove("d-none");
+                success.innerText = "Please wait we are authenticating!";
+
+                let sendMail = true;
+                let name = document.getElementById("Name").value.trim();
+                let email = document.getElementById("Email").value.trim();
+                let phone = document.getElementById("Phone").value.trim();
+                let interest = document.getElementById("Interest").value.trim();                
+                let message = document.getElementById("Msg").value.trim();
+
+                const fullURL =
+                    `${scriptURL}?name=${encodeURIComponent(name)}` +
+                    `&email=${encodeURIComponent(email)}` +
+                    `&phone=${encodeURIComponent(phone)}` +                    
+                    `&interest=${encodeURIComponent(interest)}` +
+                    `&message=${encodeURIComponent(message)}` +
+                    `&sendmail=${sendMail}`;
+
+                fetch(fullURL)
+                    .then((response) => response.text())
+                    .then(() => {
+
+                        success.innerText = "Form Submitted Successfully!";
+
+                        setTimeout(() => {
+                            success.classList.add("d-none");
+                            success.innerText = "";
+                        }, 3000);
+
+                        document.querySelector("form").reset();
+                    })
+                    .catch((error) => {
+                        console.log("Error submitting form:", error);
+                    });
+            });
+    </script>
 </body>
 </html>
