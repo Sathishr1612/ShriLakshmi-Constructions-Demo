@@ -514,6 +514,7 @@ body.loaded .reveal-up { animation: revealUp 1s var(--ease) forwards; animation-
 .loc i { color: var(--purple); }
 .facts { list-style: none; padding: 0; margin: 0 0 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
 .facts li { font-size: .78rem; padding: .25rem .7rem; border-radius: 50px; background: var(--grad-soft); color: var(--indigo); font-weight: 600; }
+.btn-price { margin: .25rem 0 .9rem; padding: .55rem 1rem; font-size: .9rem; text-align: center; align-self: stretch; }
 .project-link { margin-top: auto; font-weight: 600; font-family: 'Outfit', sans-serif; }
 .project-link i { transition: transform .3s; display: inline-block; }
 .project-link:hover i { transform: translate(3px, -3px); }
