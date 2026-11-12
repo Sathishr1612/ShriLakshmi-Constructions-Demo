@@ -190,9 +190,10 @@ img { max-width: 100%; display: block; }
 }
 /* Phones: call pill collapses to the round icon */
 @media (max-width: 575.98px) {
-  #mainNav .nav-inner { grid-template-rows: 70px; column-gap: .3rem; }
-  .brand-logo { height: 54px; }
-  #mainNav.scrolled .brand-logo { height: 48px; }
+  #mainNav .nav-inner { grid-template-rows: 84px; column-gap: .3rem; }
+  #mainNav.scrolled .nav-inner { grid-template-rows: 74px; }
+  .brand-logo { height: 74px; }
+  #mainNav.scrolled .brand-logo { height: 64px; }
   .mobile-call { padding: 0; border: 0; }
   .mobile-call .nav-call-icon { width: 40px; height: 40px; flex-basis: 40px; }
   .mobile-call-text { display: none; }
